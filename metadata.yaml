@@ -1,0 +1,11 @@
+name: sso-provider
+summary: A template for any SSO provider
+maintainer: Florian Waibel <fwaibel@eclipsesource.com>
+description: |
+  A template for any SSO provider to use with Instauth
+categories:
+  - security
+subordinate: false
+requires:
+  Auth:
+    interface: saml
