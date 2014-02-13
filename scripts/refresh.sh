@@ -1,8 +1,8 @@
 #!/bin/bash
 export LOCAL_CHARM_REPO=${LOCAL_CHARM_REPO-~/charms/precise}
+export CHARM_HOME=$(dirname "$0")/..
 
 export CHARM_NAME=sso-provider
-export CHARM_HOME=instauth-sso-provider-template-charm
 
 echo "Refreshing charm ${CHARM_NAME} from ${CHARM_HOME} into ${LOCAL_CHARM_REPO}:"
 
