@@ -6,4 +6,6 @@ juju-log "Entered the MITREid Connect Server charm stop hook."
 
 juju-log "MITREid Connect Server stopping..."
 
-rm .lock && juju-log "Removed lockfile - waiting 30 seconds." && sleep 30
+killall java
+
+rm -f .lock && juju-log "Removed lockfile - waiting 30 seconds." && sleep 30
