@@ -1,4 +1,16 @@
 #!/bin/bash
-# Here put anything that is needed to start the service.
-# Note that currently this is run directly after install
-# i.e. 'service apache2 start'
+
+set -e # If any command fails, stop execution of the hook with that error
+
+juju-log "Entered the MITREid Connect Server charm start hook."
+
+[ -f .lock ] && { juju-log "Lockfile present. Already started." ; exit 0 }
+
+/usr/bin/mvn -f OpenID-Connect-Java-Spring-Server/openid-connect-server-webapp/pom.xml jetty:run &
+disown
+
+juju-log "MITREid Connect Server starting..."
+
+touch .lock
+
+juju-log "Lockfile created."

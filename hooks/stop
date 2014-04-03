@@ -1,7 +1,9 @@
 #!/bin/bash
-# This will be run when the service is being torn down, allowing you to disable
-# it in various ways..
-# For example, if your web app uses a text file to signal to the load balancer
-# that it is live... you could remove it and sleep for a bit to allow the load
-# balancer to stop sending traffic.
-# rm /srv/webroot/server-live.txt && sleep 30
+
+set -e # If any command fails, stop execution of the hook with that error
+
+juju-log "Entered the MITREid Connect Server charm stop hook."
+
+juju-log "MITREid Connect Server stopping..."
+
+rm .lock && { juju-log "Removed lockfile - waiting 30 seconds."; sleep 30 }

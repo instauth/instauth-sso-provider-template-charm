@@ -1,10 +1,27 @@
 #!/bin/bash
-# Here do anything needed to install the service
-# i.e. apt-get install -y foo  or  bzr branch http://myserver/mycode /srv/webroot
-# Make sure this hook exits cleanly and is idempotent, common problems here are
-# failing to account for a debconf question on a dependency, or trying to pull
-# from github without installing git first.
 
-#apt-get install -y hollow-sso-provider
+set -e # If any command fails, stop execution of the hook with that error
+
+juju-log "Entered the MITREid Connect Server charm install hook."
+
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:webupd8team/java
+apt-get update
+echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+apt-get install -y oracle-java7-installer
+
+apt-get install -y git
+apt-get install -y maven
+
+juju-log "Java, Git and Maven successfully installed."
+
+git clone https://github.com/instauth/OpenID-Connect-Java-Spring-Server.git
+
+juju-log "MITREid Connect Server successfully cloned."
+
+/usr/bin/mvn -f OpenID-Connect-Java-Spring-Server/pom.xml install
+
+juju-log "MITREid Connect Server successfully installed."
+
 exit 0
-
