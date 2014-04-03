@@ -20,7 +20,7 @@ git clone https://github.com/instauth/OpenID-Connect-Java-Spring-Server.git
 
 juju-log "MITREid Connect Server successfully cloned."
 
-/usr/bin/mvn -f OpenID-Connect-Java-Spring-Server/pom.xml install
+/usr/bin/mvn -Dmaven.test.skip=true -f OpenID-Connect-Java-Spring-Server/pom.xml install
 
 juju-log "MITREid Connect Server successfully installed."
 
