@@ -16,6 +16,7 @@ apt-get install -y maven
 
 juju-log "Java, Git and Maven successfully installed."
 
+rm -rf OpenID-Connect-Java-Spring-Server
 git clone https://github.com/instauth/OpenID-Connect-Java-Spring-Server.git
 
 juju-log "MITREid Connect Server successfully cloned."
