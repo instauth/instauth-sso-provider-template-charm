@@ -4,13 +4,18 @@ set -e # If any command fails, stop execution of the hook with that error
 
 juju-log "Entered the MITREid Connect Server charm start hook."
 
-PORT=8080
-juju-log "Opening port $1 for MITREid Connect Server"
+PORT=80
+juju-log "Opening port $PORT for MITREid Connect Server"
 open-port $PORT
 
 if [ -f .lock ]; then juju-log "Lockfile present. Already started." ; exit 0 ; fi
 
-/usr/bin/mvn -f OpenID-Connect-Java-Spring-Server/openid-connect-server-webapp/pom.xml jetty:run &
+IPADDR=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d" " -f1)
+BASEURL=http://$(echo $IPADDR:$PORT | sed 's/:80$//')
+
+juju-log "Configured base URL: $BASEURL"
+
+/usr/bin/mvn -D jetty.port=$PORT -D oic.baseurl="$BASEURL" -f OpenID-Connect-Java-Spring-Server/openid-connect-server-webapp/pom.xml jetty:run &
 disown
 
 juju-log "MITREid Connect Server starting..."
