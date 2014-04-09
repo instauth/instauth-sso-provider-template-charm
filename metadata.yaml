@@ -7,5 +7,6 @@ categories:
   - security
 subordinate: false
 requires:
-  Auth:
-    interface: saml
+  auth:
+    interface: oic-config
+    sets: [issuer_url]

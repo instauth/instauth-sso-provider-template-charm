@@ -2,9 +2,9 @@
 
 set -e # If any command fails, stop execution of the hook with that error
 
-juju-log "Entered the MITREid Connect Server charm stop hook."
+source "$(dirname "$0")/config.sh"
 
-juju-log "MITREid Connect Server stopping..."
+juju-log "$APP_LONG_NAME stopping..."
 
 killall java
 
