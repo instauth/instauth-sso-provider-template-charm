@@ -6,7 +6,18 @@ description: |
 categories:
   - security
 subordinate: false
-requires:
+provides:
   auth:
     interface: oic-config
-    sets: [issuer_url]
+    sets:
+      - issuer_url
+      - authorization_endpoint
+      - token_endpoint
+      - userinfo_endpoint
+      - jwks_endpoint
+      - client_id
+      - client_secret
+    gets:
+      - client_name
+      - redirect_uris
+      - description

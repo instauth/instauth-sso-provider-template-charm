@@ -34,7 +34,14 @@ do_changed() {
     $LOGCMD $($REL_GET)
     $LOGCMD Relation members:
     $LOGCMD $($REL_LIST)
-    $REL_SET issuer_url="$(base_url)/openid-connect-server-webapp/"
+
+    ISSUER_URL=$(base_url)/openid-connect-server-webapp/
+    $REL_SET issuer_url=$ISSUER_URL
+    $REL_SET authorization_endpoint=${ISSUER_URL}authorize
+    $REL_SET token_endpoint=${ISSUER_URL}token
+    $REL_SET userinfo_endpoint=${ISSUER_URL}userinfo
+    $REL_SET jwks_endpoint=${ISSUER_URL}jwk
+    
 }
 
 do_departed() {
