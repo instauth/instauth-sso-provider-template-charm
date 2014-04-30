@@ -1,4 +1,4 @@
-name: sso-provider
+name: mitreid-connect-charm
 summary: A template for any SSO provider
 maintainer: Florian Waibel <fwaibel@eclipsesource.com>
 description: |
